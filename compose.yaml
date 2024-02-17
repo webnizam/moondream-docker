@@ -11,3 +11,10 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    volumes:
+      - cache-volume:/cache
+    environment:
+      - TRANSFORMERS_CACHE=/cache
+
+volumes:
+  cache-volume:
