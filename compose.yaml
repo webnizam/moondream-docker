@@ -16,19 +16,19 @@ services:
               count: 1
               capabilities: [gpu]
 
-  # gradio:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #     args:
-  #       PYTHON_VERSION: "3.10.10"
-  #   ports:
-  #     - "7860:7860"
-  #   command: ["python", "gradio_demo.py"]
-  # deploy:
-  #   resources:
-  #     reservations:
-  #       devices:
-  #         - driver: nvidia
-  #           count: 1
-  #           capabilities: [gpu]
+  gradio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: "3.10.10"
+    ports:
+      - "7860:7860"
+    command: ["python", "gradio_demo.py"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
