@@ -1,13 +1,12 @@
-import sys
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import JSONResponse
-import torch
 from PIL import Image
 import io
 import re
 from threading import Thread
 from moondream import Moondream, detect_device
-from transformers import CodeGenTokenizerFast as Tokenizer
+from transformers import TextIteratorStreamer, CodeGenTokenizerFast as Tokenizer
+
 
 app = FastAPI()
 
