@@ -35,6 +35,7 @@ def answer_question(img, prompt):
     for new_text in streamer:
         clean_text = re.sub("<$|END$", "", new_text)
         buffer += clean_text
+        print(buffer)
         yield buffer.strip("<END")
 
 
