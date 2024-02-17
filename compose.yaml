@@ -14,7 +14,8 @@ services:
     volumes:
       - cache-volume:/cache
     environment:
-      - TRANSFORMERS_CACHE=/cache
+      - HF_HOME=/cache
+      - MPLCONFIGDIR=/cache/matplotlib
 
 volumes:
   cache-volume:
