@@ -20,23 +20,23 @@ moondream.eval()
 def answer_question(img, prompt):
     image_embeds = moondream.encode_image(img)
     streamer = TextIteratorStreamer(tokenizer, skip_special_tokens=True)
-    thread = Thread(
-        target=moondream.answer_question,
-        kwargs={
-            "image_embeds": image_embeds,
-            "question": prompt,
-            "tokenizer": tokenizer,
-            "streamer": streamer,
-        },
-    )
-    thread.start()
+    buffer = []
 
-    buffer = ""
-    for new_text in streamer:
-        clean_text = re.sub("<$|END$", "", new_text)
-        buffer += clean_text
-        print(buffer)
-        yield buffer.strip("<END")
+    def run_inference():
+        for new_text in moondream.answer_question(
+            image_embeds=image_embeds,
+            question=prompt,
+            tokenizer=tokenizer,
+            streamer=streamer,
+        ):
+            clean_text = re.sub("<$|END$", "", new_text)
+            buffer.append(clean_text.strip("<END"))
+
+    thread = Thread(target=run_inference)
+    thread.start()
+    thread.join()
+
+    return "".join(buffer)
 
 
 @app.post("/answer-question/")
