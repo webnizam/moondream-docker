@@ -44,7 +44,7 @@ async def answer_question_endpoint(
     prompt: str = Form(...), file: UploadFile = File(...)
 ):
     img = Image.open(io.BytesIO(await file.read()))
-    response = next(answer_question(img, prompt))
+    response = answer_question(img, prompt)
     return JSONResponse({"response": response})
 
 
