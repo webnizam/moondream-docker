@@ -20,7 +20,7 @@ RUN mkdir -p /cache && chmod -R 777 /cache
 COPY . .
 
 # Expose the port that the application listens on
-EXPOSE 7860
+EXPOSE 8000 7860
 
 # Run the application
 CMD ["python", "gradio_demo.py"]
