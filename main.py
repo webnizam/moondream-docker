@@ -39,6 +39,7 @@ def answer_question(img, prompt):
     return "".join(buffer)
 
 
+@app.post("/answer-question")
 @app.post("/answer-question/")
 async def answer_question_endpoint(
     prompt: str = Form(...), file: UploadFile = File(...)
