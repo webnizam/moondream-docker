@@ -63,4 +63,4 @@ with gr.Blocks() as demo:
     submit.click(answer_question, [img, prompt], output)
     prompt.submit(answer_question, [img, prompt], output)
 
-demo.queue().launch(debug=True)
+demo.queue().launch(debug=True, server_name="0.0.0.0", server_port=7860)
